@@ -28,33 +28,28 @@ void setupInjection() {
   );
 
   // ===> POSTS
-
   // data
   getIt.registerLazySingleton(() => PostRemoteDatasource(getIt()));
   getIt.registerLazySingleton<PostRepository>(
     () => PostRepositoryImpl(getIt()),
   );
-
   // domain
   getIt.registerLazySingleton(() => PostUsecase(getIt()));
-
   // presentation
   getIt.registerFactory(() => PostBloc(getIt()));
 
-  // ===> POST User
+  // ===> USER POSTS
   // data
   getIt.registerLazySingleton(() => PostUserRemoteDatasource(getIt()));
   getIt.registerLazySingleton<PostUserRepository>(
     () => PostUserRepositoryImpl(getIt()),
   );
-
   // domain
   getIt.registerLazySingleton(() => PostUserUsecase(getIt()));
-
   // presentation
   getIt.registerFactory(() => PostUserBloc(getIt()));
 
+  // ==============================================
   // anda bisa melanjutkan di bawah ini
-
-  // ===> POST Comment
+  // ===> COMMENT POST
 }
