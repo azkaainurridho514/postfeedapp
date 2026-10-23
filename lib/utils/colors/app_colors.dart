@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:postfeedapp/utils/constant/enums.dart';
 
 class AppColors {
   static const Color primary = Color(0xFF6C5CE7);

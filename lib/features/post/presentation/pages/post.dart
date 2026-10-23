@@ -125,7 +125,14 @@ class _PostPageState extends State<PostPage> {
               child: ListView.builder(
                 padding: const EdgeInsets.fromLTRB(14, 14, 14, 24),
                 itemCount: state.postList.length,
-                itemBuilder: (context, i) => PostCard(post: state.postList[i]),
+                cacheExtent: 600,
+                itemBuilder: (context, i) {
+                  final post = state.postList[i];
+                  return RepaintBoundary(
+                    key: ValueKey(post.id),
+                    child: PostCard(post: post),
+                  );
+                },
               ),
             );
           }
