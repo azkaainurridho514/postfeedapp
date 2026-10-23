@@ -11,6 +11,11 @@ import '../../features/post/data/repositories/user_repository_impl.dart';
 import '../../features/post/domain/repositories/user_repository.dart';
 import '../../features/post/domain/usecases/user_usecase.dart';
 import '../../features/post/presentation/bloc/user/user_bloc.dart';
+import '../../features/post/data/datasources/comment_remote_datasource.dart';
+import '../../features/post/data/repositories/comment_repository_impl.dart';
+import '../../features/post/domain/repositories/comment_repository.dart';
+import '../../features/post/domain/usecases/comment_usecase.dart';
+import '../../features/post/presentation/bloc/comment/comment_bloc.dart';
 import '../constant/constant.dart';
 
 final getIt = GetIt.instance;
@@ -52,4 +57,13 @@ void setupInjection() {
   // ==============================================
   // anda bisa melanjutkan di bawah ini
   // ===> COMMENT POST
+  // data
+  getIt.registerLazySingleton(() => PostCommentRemoteDatasource(getIt()));
+  getIt.registerLazySingleton<PostCommentRepository>(
+    () => PostCommentRepositoryImpl(getIt()),
+  );
+  // domain
+  getIt.registerLazySingleton(() => PostCommentUsecase(getIt()));
+  // presentation
+  getIt.registerFactory(() => PostCommentBloc(getIt()));
 }

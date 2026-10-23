@@ -6,6 +6,8 @@ import '../../../../utils/colors/app_colors.dart';
 import '../../domain/entity/post_entity.dart';
 import '../bloc/user/user_bloc.dart';
 import '../pages/user_post.dart';
+import '../bloc/comment/comment_bloc.dart';
+import '../pages/comment_post.dart';
 
 class PostCard extends StatelessWidget {
   final PostEntity post;
@@ -35,13 +37,9 @@ class PostCard extends StatelessWidget {
           ),
         ],
       ),
-      child: Material(
-        color: Colors.transparent,
-        child: InkWell(
-          borderRadius: BorderRadius.circular(16),
-          child: Padding(
-            padding: const EdgeInsets.all(16),
-            child: Column(
+      child: Padding(
+        padding: const EdgeInsets.all(16),
+        child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 GestureDetector(
@@ -148,15 +146,22 @@ class PostCard extends StatelessWidget {
                       icon: Icons.message_rounded,
                       value: "Comment",
                       color: AppColors.textSecondary,
-                      onTap: () => print("To Page Comment"),
+                      onTap:
+                          () => Navigator.of(context).push(
+                            MaterialPageRoute(
+                              builder:
+                                  (_) => BlocProvider(
+                                    create: (context) => getIt<PostCommentBloc>(),
+                                    child: CommentPostPage(post: post),
+                                  ),
+                            ),
+                          ),
                     ),
                   ],
                 ),
               ],
             ),
           ),
-        ),
-      ),
     );
   }
 }
